@@ -1,0 +1,11 @@
+.env
+
+tpm/cache/*
+!tpm/cache/.gitkeep
+tpm/logs/*
+!tpm/logs/.gitkeep
+
+.phpunit.result.cache
+composer.lock
+vendor
+
