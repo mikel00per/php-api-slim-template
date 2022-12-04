@@ -7,7 +7,7 @@ on:
     branches: [ "dev" ]
 
 jobs:
-  build:
+  http_access:
 
     runs-on: ubuntu-latest
 
