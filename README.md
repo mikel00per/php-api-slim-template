@@ -1,11 +1,12 @@
-# Slim template
+# Api Slim template
 
-## MAke commands
+Template to create an API using php-slim-microservice
+
+## Make commands
 
 ````shell
 $ make help
 
-➜  slim-template git:(improvement/create-template-slim) ✗ make help
 Usage: make [target] ...
 
 Container:
