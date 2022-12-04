@@ -1,0 +1,24 @@
+name: Test http access
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Copy env
+        run: cp api/.env.example api/.env
+
+      - name: Run containers
+        run: make run
+
+      - name: Check access
+        run: make test-integration
