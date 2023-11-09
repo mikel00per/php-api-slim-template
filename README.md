@@ -1,4 +1,4 @@
-# Api Slim template
+# Slim API template
 
 Template to create an API using php-slim-microservice
 
