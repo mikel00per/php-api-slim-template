@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-use ContainerSettings\SettingsInterface;
-use Microservices\Http\Handlers\HttpErrorHandler;
-use Microservices\Http\MicroserviceSlim;
-use Microservices\Http\MicroserviceSlimInterface;
-use Microservices\Loggers\LoggerFactory;
 use Monolog\Processor\UidProcessor;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
@@ -16,6 +11,13 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Log\LoggerInterface;
+use Shared\Domain\Bus\Command\CommandBus;
+use Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus;
+use Shared\Infrastructure\Settings\SettingsInterface;
+use Shared\Infrastructure\Slim\Handlers\HttpErrorHandler;
+use Shared\Infrastructure\Slim\Loggers\LoggerFactory;
+use Shared\Infrastructure\Slim\MicroserviceSlim;
+use Shared\Infrastructure\Slim\MicroserviceSlimInterface;
 use Slim\Middleware\ErrorMiddleware;
 
 return [
@@ -82,5 +84,13 @@ return [
         $errorMiddleware->setDefaultErrorHandler($httpErrorHandler);
 
         return $errorMiddleware;
+    },
+    CommandBus::class => static function (ContainerInterface $container) {
+        $settings = $container->get(SettingsInterface::class);
+
+        // This can be more simple using Symfony the handlers should be an array of instance objects.
+        $commandHandlers = (require $settings->get('command_handlers.definition'))($container);
+
+        return new InMemorySymfonyCommandBus(DI\autowire());
     }
 ];

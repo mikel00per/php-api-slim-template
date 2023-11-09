@@ -35,7 +35,7 @@ $settings['error_middleware'] = [
 $settings['container'] = [
     'definitions' => $settings['config'] . ((string) getenv('PATH_CONTAINER_DEFINITION')),
     'cache' => [
-        'enabled' => ((bool) getenv('COMPILE_CONTAINER')),
+        'enabled' => false,
         'path' => $settings['cache'] . ((string) getenv('PATH_CONTAINER_COMPILATION'))
     ]
 ];
@@ -52,5 +52,7 @@ $settings['router'] = [
             $settings['cache'] . ((string) getenv('PATH_ROUTES_CACHE'))
     ],
 ];
+
+$settings['command_handlers']['definition'] = $settings['config'] . ((string) getenv('PATH_COMMAND_HANDLERS_DEFINITION'));
 
 return $settings;
