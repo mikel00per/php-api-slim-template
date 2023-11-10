@@ -35,7 +35,7 @@ $settings['error_middleware'] = [
 $settings['container'] = [
     'definitions' => $settings['config'] . ((string) getenv('PATH_CONTAINER_DEFINITION')),
     'cache' => [
-        'enabled' => false,
+        'enabled' => ((bool) getenv('COMPILE_CONTAINER')),
         'path' => $settings['cache'] . ((string) getenv('PATH_CONTAINER_COMPILATION'))
     ]
 ];

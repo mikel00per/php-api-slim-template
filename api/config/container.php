@@ -91,6 +91,6 @@ return [
         // This can be more simple using Symfony the handlers should be an array of instance objects.
         $commandHandlers = (require $settings->get('command_handlers.definition'))($container);
 
-        return new InMemorySymfonyCommandBus(DI\autowire());
+        return new InMemorySymfonyCommandBus($commandHandlers);
     }
 ];

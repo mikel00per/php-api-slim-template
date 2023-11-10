@@ -5,7 +5,6 @@ tpm/cache/*
 tpm/logs/*
 !tpm/logs/.gitkeep
 
-.phpunit.result.cache
 composer.lock
 vendor
 
