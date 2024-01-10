@@ -1,1 +1,13 @@
 .idea
+
+api/.env
+
+api/tpm/cache/*
+api/!tpm/cache/.gitkeep
+api/tpm/logs/*
+api/!tpm/logs/.gitkeep
+
+api/composer.lock
+api/vendor
+
+api/
