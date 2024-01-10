@@ -13,12 +13,14 @@ use Psr\Http\Message\UriFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Shared\Domain\Bus\Command\CommandBus;
 use Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus;
+use Shared\Infrastructure\DependencyInjection\CompilerPassesType;
 use Shared\Infrastructure\Settings\SettingsInterface;
 use Shared\Infrastructure\Slim\Handlers\HttpErrorHandler;
 use Shared\Infrastructure\Slim\Loggers\LoggerFactory;
 use Shared\Infrastructure\Slim\MicroserviceSlim;
 use Shared\Infrastructure\Slim\MicroserviceSlimInterface;
 use Slim\Middleware\ErrorMiddleware;
+use function Lambdish\Phunctional\map;
 
 return [
     MicroserviceSlimInterface::class => static function (ContainerInterface $container) {
@@ -86,11 +88,9 @@ return [
         return $errorMiddleware;
     },
     CommandBus::class => static function (ContainerInterface $container) {
-        $settings = $container->get(SettingsInterface::class);
-
-        // This can be more simple using Symfony the handlers should be an array of instance objects.
-        $commandHandlers = (require $settings->get('command_handlers.definition'))($container);
-
-        return new InMemorySymfonyCommandBus($commandHandlers);
+        return new InMemorySymfonyCommandBus(map(
+            fn ($commandHandler) => $container->get($commandHandler),
+            $container->get(CompilerPassesType::COMMAND_HANDLERS->value)
+        ));
     }
 ];
