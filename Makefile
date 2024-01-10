@@ -51,7 +51,7 @@ test-coverage: ##@Tests Execute tests with coverage
 	docker compose exec php composer test:coverage
 
 test-integration: ##@Tests Execute integration-tests, check access to localhost
-	curl -s -o /dev/null -I -w "%{http_code}" http://localhost/api
+	curl -s -o /dev/null -I -w "%{http_code}" http://localhost/api/example
 	@echo $?
 
 exec: ##@Code Execute the code index

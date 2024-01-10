@@ -1,4 +1,4 @@
-name: Test http access
+name: CI
 
 on:
   push:
@@ -19,6 +19,9 @@ jobs:
 
       - name: Run containers
         run: make run
+
+      - name: Check tests
+        run: make test
 
       - name: Check access
         run: make test-integration
