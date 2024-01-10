@@ -17,45 +17,42 @@ help: ##@Miscellaneous Show this help
 	@echo "Written by $(SCRIPT_AUTHOR), version $(SCRIPT_VERSION)"
 	@echo "Please report any bug or error to the author."
 
-start: ##@Library Init library rename strings
-	sh start.sh
-
 run: ##@Container Build and run php container
-	docker-compose up -d --build
+	docker compose up -d --build
 
 build: ##@Container Build php container
-	docker-compose build
+	docker compose build
 
 stop: ##@Container Stop php container
-	docker-compose down
+	docker compose down
 
 destroy: ##@Container Remove all data related with php container
-	docker-compose down --rmi local
+	docker compose down --rmi local
 
 php-shell: ##@Container SHH in container
-	docker-compose exec php /bin/bash
+	docker compose exec php /bin/bash
 
 nginx-shell: ##@Container SHH in container
-	docker-compose exec nginx /bin/bash
+	docker compose exec nginx /bin/bash
 
 logs: ##@Container Show logs in container
-	docker-compose logs
+	docker compose logs
 
 lint: ##@Style Show style errors
-	docker-compose exec php composer lint
+	docker compose exec php composer lint
 
 lint-fix: ##@Style Fix style errors
-	docker-compose exec php composer lint:fix
+	docker compose exec php composer lint:fix
 
 test: ##@Tests Execute tests
-	docker-compose exec php composer test
+	docker compose exec php composer test
 
 test-coverage: ##@Tests Execute tests with coverage
-	docker-compose exec php composer test:coverage
+	docker compose exec php composer test:coverage
 
 test-integration: ##@Tests Execute integration-tests, check access to localhost
 	curl -s -o /dev/null -I -w "%{http_code}" http://localhost/api
 	@echo $?
 
 exec: ##@Code Execute the code index
-	docker-compose exec php composer exec
+	docker compose exec php composer exec
