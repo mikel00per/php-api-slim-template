@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ApiSlimTemplate\Example\Infrastructure\Controllers;
 
 use ApiSlimTemplate\Example\Application\ExampleCommand;
@@ -7,15 +9,11 @@ use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Shared\Domain\Bus\Command\CommandBus;
-use Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus;
 use Throwable;
-use ValueObjects\Uuid;
 
 final class GetExampleController
 {
-    public function __construct(private CommandBus $bus)
-    {
-    }
+    public function __construct(private CommandBus $bus) {}
 
     /**
      * @throws Throwable
