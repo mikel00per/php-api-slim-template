@@ -6,9 +6,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:
-  http_access:
+permissions:
+  contents: read
 
+jobs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
