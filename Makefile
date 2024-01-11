@@ -29,10 +29,10 @@ stop: ##@Container Stop php container
 destroy: ##@Container Remove all data related with php container
 	docker compose down --rmi local
 
-php-shell: ##@Container SHH in container
+php-shell: ##@Container SSH in container
 	docker compose exec php /bin/bash
 
-nginx-shell: ##@Container SHH in container
+nginx-shell: ##@Container SSH in container
 	docker compose exec nginx /bin/bash
 
 logs: ##@Container Show logs in container
