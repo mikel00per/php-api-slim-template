@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   php:
+    user: "${UID}:${GID}"
     container_name: php-alpine-development
     hostname: php-alpine-development
     image: mikel00per/php-alpine-development
